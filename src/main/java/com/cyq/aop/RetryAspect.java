@@ -33,7 +33,7 @@ public class RetryAspect implements Ordered {
 		this.order = order;
 	}
 	
-	@Around("execution(* com.cyq.service..*.*(..)) && @annotation(idempotentRetry)")
+	@Around("@annotation(idempotentRetry)")
 	public Object doConcurrentOperation(ProceedingJoinPoint pjp, IdempotentRetry idempotentRetry) throws Throwable {
 		int numAttempts = 0;
 		Exception exception;

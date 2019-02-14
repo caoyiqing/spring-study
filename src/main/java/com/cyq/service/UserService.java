@@ -11,6 +11,10 @@ import com.cyq.aop.IdempotentRetry;
 @Component
 public class UserService {
 	
+	public UserService() {
+		System.out.println(this + " 构造函数");
+	}
+
 	@Autowired
 	private ApplicationContext applicationContext;
 	
@@ -23,7 +27,10 @@ public class UserService {
 	@IdempotentRetry(maxRetries = 3)
 	public String login() {
 		System.out.println(this + "  login....");
-		int z = num.get().intValue();
+		int z = 0;
+		if (null != num.get()) {
+			z = num.get().intValue();
+		}
 		num.set(1);
 		int i = 1 / z;
 		System.out.println(this + "  login success....");
